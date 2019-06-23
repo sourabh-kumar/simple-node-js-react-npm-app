@@ -1,20 +1,21 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node'
+    }
+
     stages {
-        stage('Build') {
+        stage( 'Install dependencies' ) {
             steps {
-                echo 'Building..'
+                echo 'Installing npm dependencies...'
+                sh 'npm install'
             }
         }
-        stage('Test') {
+        stage( 'Build project' ) {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                echo 'Build project...'
+                sh 'npm run build'
             }
         }
     }
